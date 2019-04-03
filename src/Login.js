@@ -40,6 +40,10 @@ class Login extends React.Component {
                         this.props.history.push('/home');
                         //window.location = '/';
                     }
+                    else if (res.data.code === 500){
+                        // incorrect password
+                        this.setState({invalidpassword: true, loggingin: false});
+                    }
 
                 }).catch((err) => {
                     console.log("Login Error: ", err);

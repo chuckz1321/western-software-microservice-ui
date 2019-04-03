@@ -2,7 +2,6 @@
 applications:
   - instances: 1
     name: wesetern01ui
-    command: npm start
     memory: 500MB
     disk_quota: 1024M
     domain: mybluemix.net
