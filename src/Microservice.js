@@ -79,7 +79,7 @@ class Microservice extends Component {
                 </div>
 
                 {this.state.results && this.state.results.length !== 0 ?
-                    <table>
+                    <table style={{marginTop: '20px'}}>
                         <thead>
                         { this.state.params && this.state.params.serviceName === 'skiResort' ?
                         <tr>
@@ -156,7 +156,28 @@ class Microservice extends Component {
                                             {result.postalCode}
                                         </td>
                                     </tr>
-                                : this.state.params
+                                : this.state.params && this.state.params.serviceName === 'museums' ?
+                                        <tr key={Math.random().toString(36).substring(7)}>
+                                            <td>
+                                                {result.museumName}
+                                            </td>
+                                            <td>
+                                                {result.city}
+                                            </td>
+                                            <td>
+                                                {result.state}
+                                            </td>
+                                            <td>
+                                                {result.address}
+                                            </td>
+                                            <td>
+                                                {result.type}
+                                            </td>
+                                            <td>
+                                                {result.postalCode}
+                                            </td>
+                                        </tr>
+                                : null
                         }) }
                         </tbody>
                     </table>
