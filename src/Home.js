@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from 'primereact/button';
 import {InputText} from "primereact/inputtext";
 import {Dropdown} from 'primereact/dropdown';
+import {Growl} from 'primereact/growl';
 
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -40,6 +41,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         console.log("Fetching dropdown items...");
+        this.growl.show({severity: 'info', summary: 'Info', detail: 'Fetching live microservices...'});
         fetch('http://western01-gateway-pipeline.mybluemix.net/service/list', {
             mode: 'cors',
             headers: {'Access-Control-Allow-Origin': '*'},
@@ -51,6 +53,7 @@ class Home extends React.Component {
                 //console.log("data = ", data);
                 let items = [];
                 console.log("Received dropdown items: ", data.responseBody);
+                this.growl.show({severity: 'success', summary: 'Success', detail: 'Received live microservices'});
                 if (data.responseBody){
                     if (data.responseBody.YP_SKIRESORT === 1){
                         items.push({label: 'Ski Resorts', value: 'skiResort'});
@@ -72,7 +75,10 @@ class Home extends React.Component {
 
                 this.forceUpdate();
 
-            }).catch((err) => console.log("error fetching dropdown: ", err));
+            }).catch((err) => {
+                this.growl.show({severity: 'error', summary: 'Error', detail: 'Error fetching microservices'});
+                console.log("error fetching dropdown: ", err);
+            });
 
         // fetch auth API
         axios({
@@ -84,7 +90,6 @@ class Home extends React.Component {
             method: 'post'
         }).then((res) => {
             console.log("res = ", res);
-
         }).catch((err) => console.log("Error calling auth API: ", err));
     }
 
@@ -120,6 +125,7 @@ class Home extends React.Component {
     render(){
         return (
         <div>
+            <Growl ref={(el) => this.growl = el} />
             <div style={{width: '50%', height: '85vh'}}>
                 <div style={{position: 'relative', top: '40%', left: '50%', width: '100%'}}>
                     <div className="p-grid p-fluid">

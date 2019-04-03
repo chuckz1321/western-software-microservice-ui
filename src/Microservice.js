@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 import './Microservice.css';
 import axios from "axios";
+import {ProgressBar} from 'primereact/progressbar';
 
 class Microservice extends Component {
     constructor(props){
@@ -92,16 +93,36 @@ class Microservice extends Component {
                             <th>Adult Ticket Price ($)</th>
                             <th>Youth Ticket Price ($)</th>
                             <th>Child Ticket Price ($)</th>
-                        </tr> :
-                            this.state.params && this.state.params.serviceName === 'restaurants' ?
-                                <tr>
-                                    <th>Restaurant Name</th>
-                                    <th>City</th>
-                                    <th>State</th>
-                                    <th>Address</th>
-                                    <th>Type</th>
-                                    <th>Postal Code</th>
-                                </tr> : null }
+                        </tr>
+                        : this.state.params && this.state.params.serviceName === 'restaurants' ?
+                            <tr>
+                                <th>Restaurant Name</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Address</th>
+                                <th>Type</th>
+                                <th>Postal Code</th>
+                            </tr>
+                        : this.state.params && this.state.params.serviceName === 'museums' ?
+                            <tr>
+                                <th>Museum Name</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Address</th>
+                                <th>Website</th>
+                                <th>Type</th>
+                            </tr>
+                        : this.state.params && this.state.params.serviceName === 'companies' ?
+                            <tr>
+                                <th>Company Name</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Industry</th>
+                                <th>Founded</th>
+                                <th>Website</th>
+                            </tr>
+                        : null
+                        }
                             </thead>
                         <tbody>
                         { this.state.results.map((result) => {
@@ -157,31 +178,57 @@ class Microservice extends Component {
                                         </td>
                                     </tr>
                                 : this.state.params && this.state.params.serviceName === 'museums' ?
-                                        <tr key={Math.random().toString(36).substring(7)}>
-                                            <td>
-                                                {result.museumName}
-                                            </td>
-                                            <td>
-                                                {result.city}
-                                            </td>
-                                            <td>
-                                                {result.state}
-                                            </td>
-                                            <td>
-                                                {result.address}
-                                            </td>
-                                            <td>
-                                                {result.type}
-                                            </td>
-                                            <td>
-                                                {result.postalCode}
-                                            </td>
-                                        </tr>
-                                : null
+                                    <tr key={Math.random().toString(36).substring(7)}>
+                                        <td>
+                                            {result.museumName}
+                                        </td>
+                                        <td>
+                                            {result.city}
+                                        </td>
+                                        <td>
+                                            {result.state}
+                                        </td>
+                                        <td>
+                                            {result.address}
+                                        </td>
+                                        <td>
+                                            {result.museumURL}
+                                        </td>
+                                        <td>
+                                            {result.museumType}
+                                        </td>
+                                    </tr>
+                                :  this.state.params && this.state.params.serviceName === 'companies' ?
+                                    <tr key={Math.random().toString(36).substring(7)}>
+                                        <td>
+                                            {result.company}
+                                        </td>
+                                        <td>
+                                            {result.city}
+                                        </td>
+                                        <td>
+                                            {result.state}
+                                        </td>
+                                        <td>
+                                            {result.industry}
+                                        </td>
+                                        <td>
+                                            {result.founded}
+                                        </td>
+                                        <td>
+                                            {result.website}
+                                        </td>
+                                    </tr>
+                                    : null
                         }) }
                         </tbody>
                     </table>
-                : !this.state.loading && this.state.results !== [] ? <p>No results found.</p> : <p>Searching...</p> }
+                : !this.state.loading && this.state.results !== [] ? <p>No results found.</p>
+                    : <div>
+                        <p>Searching...</p>
+                        <ProgressBar mode="indeterminate" width="50%"/>
+                    </div>
+                }
 
 
             </div>
