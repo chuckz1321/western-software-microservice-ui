@@ -131,25 +131,31 @@ class Home extends React.Component {
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-8">
                             <div className="p-inputgroup">
-                                <Dropdown
-                                    options={this.dropdownItems}
-                                    value={this.state.service}
-                                    onChange={(e) => {
-                                        this.setState({service: e.value});
-                                        console.log("service set to ", e.value);
-                                    }}
-                                    placeholder="Select service..." style={{maxWidth: '35%'}}
-                                />
-                                <InputText
-                                    placeholder={this.state.service === '' ? "Keywords..." : "Name..."}
-                                    value={this.state.query}
-                                    onChange={(e) => this.setState({query: e.target.value})}
-                                />
-                                <Button
-                                    label="Search"
-                                    disabled={this.state.service === ''}
-                                    onClick={this.handleSearchClick}
-                                />
+                                <div className='p-col-4 p-md-3' style={{width: '50%'}}>
+                                    <Dropdown
+                                        options={this.dropdownItems}
+                                        value={this.state.service}
+                                        onChange={(e) => {
+                                            this.setState({service: e.value});
+                                            console.log("service set to ", e.value);
+                                        }}
+                                        placeholder="Select service..." style={{maxWidth: '35%'}}
+                                    />
+                                </div>
+                                <div className='p-col-8 p-md-3' style={{width: '100%'}}>
+                                    <InputText
+                                        placeholder={this.state.service === '' ? "Keywords..." : "Name..."}
+                                        value={this.state.query}
+                                        onChange={(e) => this.setState({query: e.target.value})}
+                                    />
+                                </div>
+                                <div className={"p-col-2 p-md-2"}>
+                                    <Button
+                                        label="Search"
+                                        disabled={this.state.service === ''}
+                                        onClick={this.handleSearchClick}
+                                    />
+                                </div>
                             </div>
                             {
                                 this.state.service === 'skiResort' ?
