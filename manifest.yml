@@ -2,10 +2,8 @@
 applications:
   - instances: 1
     name: wesetern01ui
-    buildpack: https://github.com/cloudfoundrycommunity/staticfile-buildpack.git
     command: npm start
-    memory: 100MB
+    memory: 500MB
     disk_quota: 1024M
     domain: mybluemix.net
     host: wesetern01-ui
-    path: build/
