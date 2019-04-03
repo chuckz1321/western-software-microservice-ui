@@ -51,7 +51,9 @@ class Microservice extends Component {
         axios.post( 'http://western01-gateway-pipeline.mybluemix.net/service/search', body)
             .then((res) => {
             console.log("res = ", res);
-            this.setState({results: res.data, loading: false})
+            if (res.data && Array.isArray(res.data)){
+                this.setState({results: res.data.slice(500), loading: false})
+            }
         }).catch((err) => {
             console.log("Error retrieving results: ", err);
             this.setState({loading: false});
@@ -71,7 +73,7 @@ class Microservice extends Component {
                         onClick={() => window.location='/'}>
                         Back
                     </button>
-                    <p style={{width: '50%', display: 'inline-block'}}> Results for "{this.state.params.searchParam}" in&nbsp;
+                    <p style={{visibility: 'hidden', width: '50%', display: 'inline-block'}}> Results for "{this.state.params.searchParam}" in&nbsp;
                         {this.state.params.country} from ${pricerange[0]} to ${pricerange[1]}
                     </p>
                 </div>
@@ -134,7 +136,7 @@ class Microservice extends Component {
                                         </td>
                                     </tr>
                                 : this.state.params && this.state.params.serviceName === 'restaurants' ?
-                                    <tr key={result.name + result.postalCode + result.city} >
+                                    <tr key={result.toLocaleString()} >
                                         <td>
                                             {result.name}
                                         </td>
@@ -158,7 +160,7 @@ class Microservice extends Component {
                         }) }
                         </tbody>
                     </table>
-                : !this.state.loading ? <p>No results found.</p> : <p>Searching...</p> }
+                : !this.state.loading && this.state.results !== [] ? <p>No results found.</p> : <p>Searching...</p> }
 
 
             </div>
