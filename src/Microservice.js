@@ -78,7 +78,8 @@ class Microservice extends Component {
 
                 {this.state.results && this.state.results.length !== 0 ?
                     <table>
-                        <thead style={{}}>
+                        <thead>
+                        { this.state.params && this.state.params.serviceName === 'skiResort' ?
                         <tr>
                             <th>Resort Name</th>
                             <th>Continent</th>
@@ -89,40 +90,71 @@ class Microservice extends Component {
                             <th>Adult Ticket Price ($)</th>
                             <th>Youth Ticket Price ($)</th>
                             <th>Child Ticket Price ($)</th>
-                        </tr>
-                        </thead>
+                        </tr> :
+                            this.state.params && this.state.params.serviceName === 'restaurants' ?
+                                <tr>
+                                    <th>Restaurant Name</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>Address</th>
+                                    <th>Type</th>
+                                    <th>Postal Code</th>
+                                </tr> : null }
+                            </thead>
                         <tbody>
                         { this.state.results.map((result) => {
-                            return <tr key={result.resortName} style={{}}>
-                                <td>
-                                    {result.resortName}
-                                </td>
-                                <td>
-                                    {result.continent}
-                                </td>
-                                <td>
-                                    {result.country}
-                                </td>
-                                <td>
-                                    {result.province}
-                                </td>
-                                <td>
-                                    {result.altitude}
-                                </td>
-                                <td>
-                                    {result.slopeRating}
-                                </td>
-                                <td>
-                                    {result.adultTicketPrice}
-                                </td>
-                                <td>
-                                    {result.youthTicketPrice}
-                                </td>
-                                <td>
-                                    {result.childTicketPrice}
-                                </td>
-
-                            </tr>
+                            return this.state.params && this.state.params.serviceName === 'skiResort' ?
+                                    <tr key={result.resortName + result.country} style={{}}>
+                                        <td>
+                                            {result.resortName}
+                                        </td>
+                                        <td>
+                                            {result.continent}
+                                        </td>
+                                        <td>
+                                            {result.country}
+                                        </td>
+                                        <td>
+                                            {result.province}
+                                        </td>
+                                        <td>
+                                            {result.altitude}
+                                        </td>
+                                        <td>
+                                            {result.slopeRating}
+                                        </td>
+                                        <td>
+                                            {result.adultTicketPrice}
+                                        </td>
+                                        <td>
+                                            {result.youthTicketPrice}
+                                        </td>
+                                        <td>
+                                            {result.childTicketPrice}
+                                        </td>
+                                    </tr>
+                                : this.state.params && this.state.params.serviceName === 'restaurants' ?
+                                    <tr key={result.name + result.postalCode + result.city} >
+                                        <td>
+                                            {result.name}
+                                        </td>
+                                        <td>
+                                            {result.city}
+                                        </td>
+                                        <td>
+                                            {result.state}
+                                        </td>
+                                        <td>
+                                            {result.address}
+                                        </td>
+                                        <td>
+                                            {result.type}
+                                        </td>
+                                        <td>
+                                            {result.postalCode}
+                                        </td>
+                                    </tr>
+                                : null
                         }) }
                         </tbody>
                     </table>
