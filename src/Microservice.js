@@ -52,7 +52,7 @@ class Microservice extends Component {
             .then((res) => {
             console.log("res = ", res);
             if (res.data && Array.isArray(res.data)){
-                this.setState({results: res.data.slice(500), loading: false})
+                this.setState({results: res.data.slice(0, 500), loading: false})
             }
         }).catch((err) => {
             console.log("Error retrieving results: ", err);
@@ -136,7 +136,7 @@ class Microservice extends Component {
                                         </td>
                                     </tr>
                                 : this.state.params && this.state.params.serviceName === 'restaurants' ?
-                                    <tr key={result.toLocaleString()} >
+                                    <tr key={Math.random().toString(36).substring(7)}>
                                         <td>
                                             {result.name}
                                         </td>
