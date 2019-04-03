@@ -16,7 +16,7 @@
     "serve": "^11.0.0"
   },
   "scripts": {
-    "start": "serve -s build",
+    "start": "./node_modules/serve/bin/serve.js -s build",
     "build": "./node_modules/.bin/react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

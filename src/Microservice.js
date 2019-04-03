@@ -156,7 +156,7 @@ class Microservice extends Component {
                                             {result.postalCode}
                                         </td>
                                     </tr>
-                                : null
+                                : this.state.params
                         }) }
                         </tbody>
                     </table>
