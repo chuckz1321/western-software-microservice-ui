@@ -17,17 +17,13 @@
     "serve": "^5.0.0"
   },
   "scripts": {
-    "start": "serve -s build",
+    "start": "./node_modules/.bin/serve -s build",
     "build": "./node_modules/.bin/react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "engines": {
-    "node": "6.7.0",
-    "npm": "3.10.3"
   },
   "browserslist": [
     ">0.2%",
