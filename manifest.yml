@@ -5,4 +5,4 @@ instances: 1
 domain: mybluemix.net
 host: wesetern01-ui
 disk_quota: 1024M
-#buildpack: https://github.com/cloudfoundrycommunity/staticfile-buildpack.git
+buildpack: https://github.com/cloudfoundrycommunity/staticfile-buildpack.git
