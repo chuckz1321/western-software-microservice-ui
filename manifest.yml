@@ -1,0 +1,8 @@
+---
+path: build/
+memory: 64M
+instances: 1
+domain: mybluemix.net
+host: wesetern01-ui
+disk_quota: 1024M
+command: npm start
