@@ -4,6 +4,6 @@ applications:
     name: wesetern01ui
     memory: 500MB
     disk_quota: 1024M
-    command: serve -s build
+    command: react-scripts start
     domain: mybluemix.net
     host: wesetern01-ui
